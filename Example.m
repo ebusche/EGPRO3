@@ -32,7 +32,7 @@ end
 %params.gridSpacing = 1
 %params.patchSize = 16
 params.dictionarySize = 200;
-params.numTextonImages = 100 *(size(categories) -2);
+params.numTextonImages = 100 *(size(categories, 1) -2);
 params.pyramidLevels = 2;
 pyramid_all = BuildPyramid(filenames,newfolder,[data_dir],params,1);
 
