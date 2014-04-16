@@ -42,6 +42,6 @@ params.pyramidLevels = 3;
 % run the LLC code
 pyramid_all = BuildPyramid2(filenames,newfolder,data_dir,params.maxImageSize,params.dictionarySize,params.numTextonImages,params.pyramidLevels,1);
 
-name = [data_dir,'\pyramids_all_', num2str(params.dictionarySize), '_',num2str(params.pyramidLevels), '.mat'];
+name = ['./', data_dir,'/pyramids_all_', num2str(params.dictionarySize), '_',num2str(params.pyramidLevels), '.mat'];
 %perform SVM classification
 SVMclass(name, labels, params.numTextonImages);
