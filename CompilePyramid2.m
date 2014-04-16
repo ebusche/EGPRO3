@@ -87,7 +87,7 @@ for f = 1:size(imageFileList,1)
             maxpool_patch = max(texton_patch,[],1);
             
             % make histogram of features in bin
-            pyramid_cell{1}(i,j,:) = maxpool_patch;%hist(maxpool_patch, 1:dictionarySize)./length(texton_ind.data);
+            pyramid_cell{1}(i,j,:) = maxpool_patch;
         end
     end
 
@@ -112,7 +112,6 @@ for f = 1:size(imageFileList,1)
         %normalize the pyramid cell
         norm_cell = pyramid_cell{l}(:) / norm(pyramid_cell{l}(:),2);
         pyramid = [pyramid norm_cell' .* 2^(-l)];
-%        pyramid = [pyramid pyramid_cell{l}(:)' .* 2^(-l)];
     end
     pyramid = [pyramid pyramid_cell{pyramidLevels}(:)' .* 2^(1-pyramidLevels)];
 

@@ -36,31 +36,31 @@ function [ pyramid_all ] = BuildPyramid2( imageFileList, imageBaseDir, dataBaseD
 
 %% parameters for feature extraction (see GenerateSiftDescriptors)
 if(nargin<4)
-    maxImageSize = 1000
+    maxImageSize = 1000;
 end
 
-gridSpacing = 8
-patchSize = 16
+gridSpacing = 8;
+patchSize = 16;
 
 
 %% parameters for obtaining texton dictionary (see CalculateDictionary)
 if(nargin<5)
-    dictionarySize = 200
+    dictionarySize = 200;
 end
 
 if(nargin<6)
-    numTextonImages = 50
+    numTextonImages = 50;
 end
 
 
 %% parameters for pyramid computation (see CompilePyramid)
 if(nargin<7)
-    pyramidLevels = 4
+    pyramidLevels = 4;
 end
 
 %% parameters for all functions
 if(nargin<8)
-    canSkip = 1
+    canSkip = 1;
 end
 
 %% build the pyramid

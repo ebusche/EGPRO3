@@ -23,19 +23,19 @@ fprintf('Building SIFT Descriptors\n\n');
 %% parameters
 
 if(nargin<4)
-    maxImageSize = 1000
+    maxImageSize = 1000;
 end
 
 if(nargin<5)
-    gridSpacing = 8
+    gridSpacing = 8;
 end
 
 if(nargin<6)
-    patchSize = 16
+    patchSize = 16;
 end
 
 if(nargin<7)
-    canSkip = 0
+    canSkip = 0;
 end
 
 

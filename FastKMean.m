@@ -1,6 +1,6 @@
 function [label, centroid, dis] = FastKMean(X, k, options)
 % FKMEANS Fast K-means with optional weighting and careful initialization.
-% [L, C, D] = FKMEANS(X, k) partitions the vectors in the n-by-p matrix X
+% [L, C, D] = FastKMean(X, k) partitions the vectors in the n-by-p matrix X
 % into k (or, rarely, fewer) clusters by applying the well known batch
 % K-means algorithm. Rows of X correspond to points, columns correspond to
 % variables. The output k-by-p matrix C contains the cluster centroids. The
