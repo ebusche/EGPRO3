@@ -112,6 +112,12 @@ centers = zeros(dictionarySize, size(sift_all,2));
 %% run kmeans
 fprintf('\nRunning k-means\n');
 [labels, dictionary, d] = fkmeans(sift_all, dictionarySize);
+
+%optimize dictionary
+fprintf('optimzation\n');
+dictionary = CodebookOpt(dictionary, features.data, 500,100);
+
+
 %dictionary = sp_kmeans(centers, sift_all, options);
 %options = statset('MaxIter',100,'Display','iter');
 %[idx, dictionary] = kmeans(sift_all, dictionarySize,'emptyaction','singleton','options',options);
