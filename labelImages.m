@@ -8,7 +8,7 @@ for i = 1: size(files)
     if(~strcmp(files(i).name, '.') && ~strcmp(files(i).name, '..'))
         
         imagepath = [folder '/' files(i).name];
-        images = dir([imagepath, '/*.JPG']);
+        images = dir([imagepath, '/*.jpg']);
         suffix = files(i).name(1:4);
         categories{i} = suffix;
        
