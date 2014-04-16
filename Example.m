@@ -1,6 +1,6 @@
 % Example of how to use the BuildPyramid function
 % set image_dir and data_dir to your actual directories
-image_dir = 'scene_categories(1)'; 
+image_dir = 'images'; 
 data_dir = 'data3';
 newfolder = 'testFolder3';
 

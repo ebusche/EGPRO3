@@ -18,7 +18,7 @@ function [] = GenerateSiftDescriptors2( imageFileList, imageBaseDir, dataBaseDir
 %  file is found in dataBaseDir. This is very useful if you just want to
 %  update some of the data or if you've added new images.
 
-fprintf('Building Sift Descriptors\n\n');
+fprintf('Building SIFT Descriptors\n\n');
 
 %% parameters
 
@@ -49,7 +49,6 @@ for f = 1:size(imageFileList,1)
     imageFName = fullfile(imageBaseDir, imageFName);
     
     if(size(dir(outFName),1)~=0 && canSkip)
-        fprintf('Skipping %s\n', imageFName);
         continue;
     end
     
@@ -58,8 +57,6 @@ for f = 1:size(imageFileList,1)
     [hgt wid] = size(I);
     if min(hgt,wid) > maxImageSize
         I = imresize(I, maxImageSize/min(hgt,wid), 'bicubic');
-        fprintf('Loaded %s: original size %d x %d, resizing to %d x %d\n', ...
-            imageFName, wid, hgt, size(I,2), size(I,1));
         [hgt wid] = size(I);
     end
 
@@ -70,9 +67,6 @@ for f = 1:size(imageFileList,1)
     offsetY = floor(remY/2)+1;
     
     [gridX,gridY] = meshgrid(offsetX:gridSpacing:wid-patchSize+1, offsetY:gridSpacing:hgt-patchSize+1);
-
-    fprintf('Processing %s: wid %d, hgt %d, grid size: %d x %d, %d patches\n', ...
-             imageFName, wid, hgt, size(gridX,2), size(gridX,1), numel(gridX));
 
     %% find SIFT descriptors
     siftArr = sp_find_sift_grid(I, gridX, gridY, patchSize, 0.8);
@@ -86,7 +80,6 @@ for f = 1:size(imageFileList,1)
 
     sp_make_dir(outFName);
     save(outFName, 'features');
-
 end % for
 
 end % function

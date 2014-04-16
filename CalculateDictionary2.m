@@ -1,5 +1,5 @@
 function [ ] = CalculateDictionary2( imageFileList, dataBaseDir, featureSuffix, dictionarySize, numTextonImages, canSkip )
-%function [ ] = CalculateDictionary( imageFileList, dataBaseDir, featureSuffix, dictionarySize, numTextonImages, canSkip )
+%function [ ] = CalculateDictionary2( imageFileList, dataBaseDir, featureSuffix, dictionarySize, numTextonImages, canSkip )
 %
 %Create the texton dictionary
 %
@@ -87,42 +87,23 @@ for f = 1:numTextonImages
     ndata = size(features.data,1);
 
     sift_all = [sift_all; features.data];
-    fprintf('Loaded %s, %d descriptors, %d so far\n', inFName, ndata, size(sift_all,1));
 end
-
-fprintf('\nTotal descriptors loaded: %d\n', size(sift_all,1));
 
 ndata = size(sift_all,1);    
 if (reduce_flag > 0) & (ndata > ndata_max)
-    fprintf('Reducing to %d descriptors\n', ndata_max);
     p = randperm(ndata);
     sift_all = sift_all(p(1:ndata_max),:);
 end
         
 %% perform clustering
-%options = foptions;
-%options(1) = 1; % display
-%options(2) = 1;
-%options(3) = 0.1; % precision
-%options(5) = 1; % initialization
-%options(14) = 100; % maximum iterations
-
 centers = zeros(dictionarySize, size(sift_all,2));
 
 %% run kmeans
-fprintf('\nRunning k-means\n');
-[labels, dictionary, d] = fkmeans(sift_all, dictionarySize);
+[labels, dictionary, d] = FastKMean(sift_all, dictionarySize);
 
 %optimize dictionary
-fprintf('optimzation\n');
 dictionary = CodebookOpt(dictionary, features.data, 500,100);
-
-
-%dictionary = sp_kmeans(centers, sift_all, options);
-%options = statset('MaxIter',100,'Display','iter');
-%[idx, dictionary] = kmeans(sift_all, dictionarySize,'emptyaction','singleton','options',options);
-    
-fprintf('Saving texton dictionary\n');
+  
 sp_make_dir(outFName);
 save(outFName, 'dictionary');
 

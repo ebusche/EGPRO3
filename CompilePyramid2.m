@@ -67,9 +67,6 @@ for f = 1:size(imageFileList,1)
     wid = texton_ind.wid;
     hgt = texton_ind.hgt;
 
-    fprintf('Loaded %s: wid %d, hgt %d\n', ...
-             imageFName, wid, hgt);
-
     %% compute histogram at the finest level
     pyramid_cell = cell(pyramidLevels,1);
     pyramid_cell{1} = zeros(binsHigh, binsHigh, dictionarySize);
@@ -90,7 +87,6 @@ for f = 1:size(imageFileList,1)
             maxpool_patch = max(texton_patch,[],1);
             
             % make histogram of features in bin
-            %pyramid_cell{1}(i,j,:) = hist(texton_patch, 1:dictionarySize)./length(texton_ind.data);
             pyramid_cell{1}(i,j,:) = maxpool_patch;%hist(maxpool_patch, 1:dictionarySize)./length(texton_ind.data);
         end
     end
@@ -101,11 +97,6 @@ for f = 1:size(imageFileList,1)
         pyramid_cell{l} = zeros(num_bins, num_bins, dictionarySize);
         for i=1:num_bins
             for j=1:num_bins
-%                %sum pool
-%                pyramid_cell{l}(i,j,:) = ...
-%                pyramid_cell{l-1}(2*i-1,2*j-1,:) + pyramid_cell{l-1}(2*i,2*j-1,:) + ...
-%                pyramid_cell{l-1}(2*i-1,2*j,:) + pyramid_cell{l-1}(2*i,2*j,:);
-
                 %max pool
                 pyramid_cell{l}(i,j,:) = ...
                 max(max(pyramid_cell{l-1}(2*i-1,2*j-1,:), pyramid_cell{l-1}(2*i,2*j-1,:)), ...
