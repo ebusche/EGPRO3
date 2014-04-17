@@ -53,6 +53,6 @@ m = libsvmtrain(trainLabel, trainData, '-t 0');
 
 [C,order] = confusionmat(testLabel, predict_label);
 C
-order
+
 end
 
