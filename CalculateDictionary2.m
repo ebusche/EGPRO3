@@ -102,7 +102,7 @@ centers = zeros(dictionarySize, size(sift_all,2));
 [labels, dictionary, d] = FastKMean(sift_all, dictionarySize);
 
 %optimize dictionary
-dictionary = CodebookOpt(dictionary, features.data, 500,100);
+%dictionary = CodebookOpt(dictionary, features.data, 500,100);
   
 sp_make_dir(outFName);
 save(outFName, 'dictionary');
